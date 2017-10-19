@@ -1,0 +1,14 @@
+name: xq
+version: 0.1.0
+
+crystal: 0.22.0
+
+dependencies:
+  app:
+    github: maiha/app.cr
+    version: ">= 0.4.1"
+
+authors:
+  - maiha <maiha@wota.jp>
+
+license: MIT
