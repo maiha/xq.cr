@@ -10,7 +10,7 @@ static: src/bin/cli.cr
 test: spec
 
 .PHONY : spec
-spec:
+spec: static
 	crystal spec -v --fail-fast
 
 .PHONY : release

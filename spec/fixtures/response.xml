@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://ss.yahooapis.jp/V6">
+  <SOAP-ENV:Header>
+    <ns1:ResponseHeader>
+      <ns1:service>ReportDefinitionService</ns1:service>
+      <ns1:remainingQuota>-1</ns1:remainingQuota>
+      <ns1:quotaUsedForThisRequest>-1</ns1:quotaUsedForThisRequest>
+      <ns1:timeTakenMillis>0.0545</ns1:timeTakenMillis>
+    </ns1:ResponseHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns1:getReportFieldsResponse>
+      <ns1:rval>
+        <ns1:operationSucceeded>true</ns1:operationSucceeded>
+        <ns1:fields>
+          <ns1:fieldName>CAMPAIGN_ID</ns1:fieldName>
+          <ns1:displayFieldNameJA>キャンペーンID</ns1:displayFieldNameJA>
+          <ns1:displayFieldNameEN>CampaignID</ns1:displayFieldNameEN>
+          <ns1:fieldType>LONG</ns1:fieldType>
+          <ns1:canSelect>true</ns1:canSelect>
+          <ns1:canFilter>true</ns1:canFilter>
+        </ns1:fields>
+        <ns1:fields>
+          <ns1:fieldName>ADGROUP_ID</ns1:fieldName>
+          <ns1:displayFieldNameJA>広告グループID</ns1:displayFieldNameJA>
+          <ns1:displayFieldNameEN>Ad Group ID</ns1:displayFieldNameEN>
+          <ns1:fieldType>LONG</ns1:fieldType>
+          <ns1:canSelect>true</ns1:canSelect>
+          <ns1:canFilter>true</ns1:canFilter>
+        </ns1:fields>
+      </ns1:rval>
+    </ns1:getReportFieldsResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

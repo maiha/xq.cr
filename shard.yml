@@ -6,8 +6,11 @@ crystal: 0.22.0
 dependencies:
   app:
     github: maiha/app.cr
-    version: ">= 0.4.1"
-
+    version: ">= 0.4.3"
+  var:
+    github: maiha/var.cr
+    version: ">= 0.1.0"
+    
 authors:
   - maiha <maiha@wota.jp>
 

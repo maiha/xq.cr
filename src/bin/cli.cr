@@ -1,6 +1,6 @@
 require "../xq"
 
-class CLI
+class Xq::CLI
   include Opts
 
   USAGE = <<-EOF
@@ -12,27 +12,64 @@ class CLI
     Examples:
       (formatting)
         % cat foo.xml | {{program}} .
+      (css filtering)
+        % cat foo.xml | {{program}} .item  # => "<item>..."
     EOF
 
+#  option strict  : Bool   , "-s"       , "Find tags strictly with xpath", false
   option version : Bool   , "--version", "Print the version and exit", false
   option help    : Bool   , "--help"   , "Output this help and exit" , false
 
+  var buffer : String
+  var filter : String
+
   def run
+    xq = Xq::Plain.new(buffer)
+    nodes = xq.css(filter)
+    print(nodes)
+  end
+
+  private def setup
+    self.exit(show_version) if version
+
+    self.filter = css_filter(extract_filter!(args))
+    self.buffer = ARGF.gets_to_end
+  end
+
+  private def extract_filter!(args) : String
     case args.size
-    when 0
-      abort show_usage
-    when 1
-      pattern = args.shift
-      buf     = ARGF.gets_to_end
-      print Xq.new(buf).execute(pattern)
-    when 2
-      pattern = args.shift
-      buf = File.read(args.shift)
-      print Xq.new(buf).execute(pattern)
+    when 1,2
+      return args.shift.not_nil!
     else
       abort show_usage
     end
   end
+
+  private def css_filter(filter) : String
+    case filter
+    when /^\.$/
+      return "*"
+    when /^\.(.*)$/
+      return $1
+    else
+      abort "expected css filter like '.foo', but got '#{filter}'"
+    end
+  end
+
+  private def print(nodes : Array(XML::Node))
+    if nodes.first?.try(&.parent).try(&.document?)
+      s = String.build do |io|
+        nodes.each do |n|
+          io << n.to_s
+        end
+      end
+      puts XML.parse(s).to_xml
+    else
+      nodes.each do |n|
+        puts n.to_xml
+      end
+    end
+  end
 end
 
-CLI.run
+Xq::CLI.run
