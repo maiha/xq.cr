@@ -9,17 +9,27 @@ Command-line XML processor inspired by `jq`
 
 ## Usage
 
-- v0.1.0 supports only formatting with `.`
-
 ```shell
 % cat aho.xml
 <a><b>xxx</b></a>
+```
 
-% cat aho.xml | jq .
+#### v0.1.0
+- formatting with `.`
+
+```shell
+% cat aho.xml | xq .
 <?xml version="1.0"?>
 <a>
   <b>xxx</b>
 </a>
+```
+#### v0.2.0
+- css filtering that starts with "."
+
+```shell
+% cat aho.xml | xq .b
+<b>xxx</b>
 ```
 
 ## Development
