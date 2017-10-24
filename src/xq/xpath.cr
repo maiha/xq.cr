@@ -10,9 +10,9 @@ class Xq::XPath
     self.namespaces = doc.root.not_nil!.namespace_scopes
   end
 
-  def css(query : String)
+  def css(filter : CssFilter)
     nodes = Array(XML::Node).new
-    path  = Xq.css2xpath(query)
+    path  = Xq.css2xpath(filter.to_s)
     self.nodes.each do |node|
       node.xpath_nodes(path, namespaces_for_xpath).each do |node|
         nodes << node

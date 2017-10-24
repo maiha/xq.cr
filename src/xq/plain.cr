@@ -7,10 +7,9 @@ class Xq::Plain
     self.nodes = [doc]
   end
 
-  def css(filter : String)
+  def css(filter : CssFilter)
     nodes = Array(XML::Node).new
 
-    filter = Filter.build(filter)
     self.nodes.each do |node|
       node.xpath_nodes("//*").each do |n|
         if filter.match?(n)

@@ -17,11 +17,12 @@ class Xq::CLI
     EOF
 
 #  option strict  : Bool   , "-s"       , "Find tags strictly with xpath", false
+  option ignore  : Bool   , "-i", "Ignore case distinctions like grep", false
   option version : Bool   , "--version", "Print the version and exit", false
   option help    : Bool   , "--help"   , "Output this help and exit" , false
 
   var buffer : String
-  var filter : String
+  var filter : Xq::CssFilter
 
   def run
     xq = Xq::Plain.new(buffer)
@@ -45,15 +46,14 @@ class Xq::CLI
     end
   end
 
-  private def css_filter(filter) : String
-    case filter
-    when /^\.$/
-      return "*"
-    when /^\.(.*)$/
-      return $1
-    else
-      abort "expected css filter like '.foo', but got '#{filter}'"
-    end
+  private def css_filter(filter) : Xq::CssFilter
+    name =
+      case filter
+      when /^\.$/     ; "*"
+      when /^\.(.*)$/ ; $1
+      else ; abort "expected css filter like '.foo', but got '#{filter}'"
+      end
+    Xq::CssFilter.build(name, ignore: ignore)
   end
 
   private def print(nodes : Array(XML::Node))

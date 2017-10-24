@@ -11,7 +11,7 @@ Command-line XML processor inspired by `jq`
 
 ```shell
 % cat aho.xml
-<a><b>xxx</b></a>
+<ul><li>foo</li><li>bar</li></ul>
 ```
 
 #### v0.1.0
@@ -20,16 +20,28 @@ Command-line XML processor inspired by `jq`
 ```shell
 % cat aho.xml | xq .
 <?xml version="1.0"?>
-<a>
-  <b>xxx</b>
-</a>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+</ul>
 ```
+
 #### v0.2.0
 - css filtering that starts with "."
 
 ```shell
-% cat aho.xml | xq .b
-<b>xxx</b>
+% cat aho.xml | xq .li
+<li>foo</li>
+<li>bar</li>
+```
+
+#### v0.3.0
+- css filtering with case-ignore
+
+```shell
+% cat aho.xml | xq -i .LI
+<li>foo</li>
+<li>bar</li>
 ```
 
 ## Development
